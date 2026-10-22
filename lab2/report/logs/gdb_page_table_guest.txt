@@ -1,0 +1,29 @@
+The target architecture is set to "riscv:rv64".
+0x0000000000001000 in ?? ()
+warning: could not convert 'main' from the host encoding (CP1252) to UTF-32.
+This normally should not happen, please file a bug report.
+Breakpoint 1 at 0xffffffffc020166c: file kern/mm/pmm.c, line 152.
+
+Breakpoint 1, check_alloc_page () at kern/mm/pmm.c:152
+152	    pmm_manager->check();
+
+===== guest breakpoint =====
+PC = 0x00000000c020166c
+satp           0x8000000000080205	-9223372036854251003
+=> 0xffffffffc020166c <pmm_init+296>:	ld	a5,0(s1)
+   0xffffffffc020166e <pmm_init+298>:	ld	a5,48(a5)
+   0xffffffffc0201670 <pmm_init+300>:	jalr	a5
+   0xffffffffc0201672 <pmm_init+302>:	auipc	a0,0x1
+   0xffffffffc0201676 <pmm_init+306>:	addi	a0,a0,574
+   0xffffffffc020167a <pmm_init+310>:	jal	0xffffffffc0200148 <cprintf>
+   0xffffffffc020167e <pmm_init+314>:	jal	0xffffffffc020134e <buddy_challenge_check>
+   0xffffffffc0201682 <pmm_init+318>:	jal	0xffffffffc0201b06 <slub_challenge_check>
+VA = 0x00000000c020166c
+VPN2 = 0x1ff, VPN1 = 0x001, VPN0 = 0x001
+offset = 0x66c
+SATP.PPN = 0x80205, root_pa = 0x0000000080205000
+root_va = 0x00000000c0205000
+L2 PTE address = 0x00000000c0205ff8
+0xffffffffc0205ff8:	0x00000000200000cf
+
+===== continue =====

@@ -31,7 +31,6 @@ GDB		:= $(GCCPREFIX)gdb
 
 CC		:= $(GCCPREFIX)gcc
 CFLAGS  := -mcmodel=medany -std=gnu99 -Wno-unused -Werror 
-CFLAGS  += -march=rv64gc -mabi=lp64d -Wno-error=pointer-to-int-cast
 CFLAGS	+= -fno-builtin -Wall -O2 -nostdinc $(DEFS)
 CFLAGS	+= -fno-stack-protector -ffunction-sections -fdata-sections
 CFLAGS	+= -g
@@ -151,7 +150,9 @@ IGNORE_ALLDEPS	= clean \
 				  print-.+ \
 				  handin
 
+ifeq ($(call match,$(MAKECMDGOALS),$(IGNORE_ALLDEPS)),0)
 -include $(ALLDEPS)
+endif
 
 # files for grade script
 

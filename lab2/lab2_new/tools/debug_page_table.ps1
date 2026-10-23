@@ -1,17 +1,21 @@
 param(
-    [string]$Qemu = 'C:\Users\LENOVO\AppData\Local\Programs\qemu62\qemu-system-riscv64.exe',
-    [string]$Gdb = 'C:\Users\LENOVO\AppData\Local\Programs\riscv-dl\xpack-riscv-none-elf-gcc-15.2.0-1\bin\riscv-none-elf-gdb.exe',
+    [string]$Qemu = '',
+    [string]$Gdb = '',
     [int]$Port = 1234
 )
 
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent $PSScriptRoot
+$qemuCommand = if ($Qemu) { $null } else { Get-Command 'qemu-system-riscv64.exe' -ErrorAction SilentlyContinue }
+$gdbCommand = if ($Gdb) { $null } else { Get-Command 'riscv-none-elf-gdb.exe' -ErrorAction SilentlyContinue }
+if (!$Qemu -and $null -ne $qemuCommand) { $Qemu = $qemuCommand.Source }
+if (!$Gdb -and $null -ne $gdbCommand) { $Gdb = $gdbCommand.Source }
 $LogDir = Join-Path (Split-Path -Parent $Root) 'report\logs'
 $Log = Join-Path $LogDir ("gdb_page_table_guest_{0}.txt" -f $Port)
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
-if (!(Test-Path $Qemu)) { throw "找不到 QEMU：$Qemu" }
-if (!(Test-Path $Gdb)) { throw "找不到 RISC-V GDB：$Gdb" }
+if (!$Qemu -or !(Test-Path $Qemu)) { throw "找不到 QEMU；请通过 -Qemu 指定 qemu-system-riscv64.exe 或加入 PATH。" }
+if (!$Gdb -or !(Test-Path $Gdb)) { throw "找不到 RISC-V GDB；请通过 -Gdb 指定 riscv-none-elf-gdb.exe 或加入 PATH。" }
 
 Push-Location $Root
 try {

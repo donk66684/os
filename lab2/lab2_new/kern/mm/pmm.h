@@ -102,7 +102,7 @@ static inline int page_ref_dec(struct Page *page) {
     return page->ref;
 }
 static inline struct Page *pa2page(uintptr_t pa) {
-    if (PPN(pa) >= npage) {
+    if (PPN(pa) < nbase || PPN(pa) >= npage) {
         panic("pa2page called with invalid pa");
     }
     return &pages[PPN(pa) - nbase];

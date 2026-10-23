@@ -1,0 +1,21 @@
+Python Exception <class 'ModuleNotFoundError'>: No module named 'gdb'
+/mnt/d/Study/OS/Lab/Lab2/.gdb-wsl/extracted/usr/bin/gdb-multiarch: warning:
+Could not load the Python gdb module from `/usr/share/gdb/python'.
+Limited Python support is available from the _gdb module.
+Suggest passing --data-directory=/path/to/gdb/data-directory.
+Python Exception <class 'NameError'>: Installation error: gdb._execute_unwinders function is missing
+0x0000000000001000 in ?? ()
+Breakpoint 1 at 0xffffffffc02015c0: file kern/mm/pmm.c, line 127.
+
+Breakpoint 1, check_alloc_page () at kern/mm/pmm.c:127
+127	    pmm_manager->check();
+satp           0x8000000000080205	-9223372036854251003
+=> 0xffffffffc02015c0 <pmm_init+296>:	ld	a5,0(s0)
+   0xffffffffc02015c2 <pmm_init+298>:	ld	a5,48(a5)
+   0xffffffffc02015c4 <pmm_init+300>:	jalr	a5
+   0xffffffffc02015c6 <pmm_init+302>:	auipc	a0,0x1
+   0xffffffffc02015ca <pmm_init+306>:	addi	a0,a0,610
+   0xffffffffc02015ce <pmm_init+310>:	jal	ra,0xffffffffc020014c <cprintf>
+Cannot execute this command while the target is running.
+Use the "interrupt" command to stop the target
+and then try again.

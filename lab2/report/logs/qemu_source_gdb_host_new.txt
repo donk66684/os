@@ -1,0 +1,35 @@
+Breakpoint 1 at 0x532a81: file ../target/riscv/cpu_helper.c, line 415.
+Breakpoint 2 at 0x533b09: file ../target/riscv/cpu_helper.c, line 821.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7ffff75ff640 (LWP 433)]
+[New Thread 0x7ffff6bb9640 (LWP 434)]
+[QEMU-6.2] get_physical_address: VA=0x1000 access=0 mmu_idx=3
+#0  get_physical_address (env=0x555556899640, physical=0x7fffffffc550, prot=0x7fffffffc548, addr=4096, fault_pte_addr=0x0, access_type=0, mmu_idx=3, first_stage=true, two_stage=false, is_debug=true) at ../target/riscv/cpu_helper.c:415
+#1  0x0000555555a8786b in riscv_cpu_get_phys_page_debug (cs=0x5555568904b0, addr=4096) at ../target/riscv/cpu_helper.c:755
+#2  0x00005555558d6c80 in cpu_get_phys_page_attrs_debug (cpu=0x5555568904b0, addr=4096, attrs=0x7fffffffc5f0) at ../hw/core/cpu-sysemu.c:60
+#3  0x0000555555b4615a in cpu_memory_rw_debug (cpu=0x5555568904b0, addr=4096, ptr=0x555556daa740, len=4, is_write=false) at ../softmmu/physmem.c:3433
+#4  0x0000555555b6865d in target_memory_rw_debug (cpu=0x5555568904b0, addr=4096, buf=0x555556daa740 "", len=4, is_write=false) at ../gdbstub.c:85
+[QEMU-6.2] get_physical_address: VA=0x0 access=0 mmu_idx=3
+[QEMU-6.2] get_physical_address: VA=0xffffffffc0201000 access=0 mmu_idx=3
+[QEMU-6.2] get_physical_address: VA=0xffffffffc0201000 access=0 mmu_idx=3
+[QEMU-6.2] get_physical_address: VA=0xffffffffc0201000 access=0 mmu_idx=3
+[QEMU-6.2] get_physical_address: VA=0xffffffffc0201000 access=0 mmu_idx=3
+[QEMU-6.2] get_physical_address: VA=0xffffffffc0201000 access=0 mmu_idx=3
+[Switching to Thread 0x7ffff6bb9640 (LWP 434)]
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x1000 size=0 mmu_idx=3
+#0  riscv_cpu_tlb_fill (cs=0x5555568904b0, address=4096, size=0, access_type=MMU_INST_FETCH, mmu_idx=3, probe=false, retaddr=0) at ../target/riscv/cpu_helper.c:821
+#1  0x0000555555c5f235 in tlb_fill (cpu=0x5555568904b0, addr=4096, size=0, access_type=MMU_INST_FETCH, mmu_idx=3, retaddr=0) at ../accel/tcg/cputlb.c:1304
+#2  0x0000555555c5f9e8 in get_page_addr_code_hostp (env=0x555556899640, addr=4096, hostp=0x0) at ../accel/tcg/cputlb.c:1508
+#3  0x0000555555c5fb21 in get_page_addr_code (env=0x555556899640, addr=4096) at ../accel/tcg/cputlb.c:1540
+#4  0x0000555555c4cf34 in tb_htable_lookup (cpu=0x5555568904b0, pc=4096, cs_base=0, flags=16899, cflags=4278190080) at ../accel/tcg/cpu-exec.c:541
+[QEMU-6.2] get_physical_address: VA=0x1000 access=2 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x80000000 size=0 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x8000d600 size=4 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x8001f000 size=8 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x8001d000 size=8 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x8001b000 size=8 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x80019000 size=8 mmu_idx=3
+[QEMU-6.2] riscv_cpu_tlb_fill: VA=0x80017000 size=8 mmu_idx=3
+[Switching to Thread 0x7ffff782cbc0 (LWP 430)]
+[Switching to Thread 0x7ffff6bb9640 (LWP 434)]

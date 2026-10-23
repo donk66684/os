@@ -13,6 +13,10 @@ ifndef QEMU
 QEMU := qemu-system-riscv64
 endif
 
+ifndef BIOS
+BIOS := /mnt/d/Study/OS/.tools/qemu/riscv-qemu-5.1.0-2020.08.1-x86_64-w64-mingw32/bin/opensbi-riscv64-virt-fw_jump.bin
+endif
+
 ifndef SPIKE
 SPIKE := spike
 endif
@@ -164,15 +168,15 @@ qemu: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
 	$(V)$(QEMU) \
 		-machine virt \
 		-nographic \
-		-bios default \
-		-device loader,file=$(UCOREIMG),addr=0x80200000
+		-bios $(BIOS) \
+		-kernel $(UCOREIMG)
 
 debug: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
 	$(V)$(QEMU) \
 		-machine virt \
 		-nographic \
-		-bios default \
-		-device loader,file=$(UCOREIMG),addr=0x80200000\
+		-bios $(BIOS) \
+		-kernel $(UCOREIMG) \
 		-s -S
 
 gdb:
@@ -185,8 +189,8 @@ test: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
 	$(V)$(QEMU) \
 		-machine virt \
 		-nographic \
-		-bios default \
-		-device loader,file=$(UCOREIMG),addr=0x80200000
+		-bios $(BIOS) \
+		-kernel $(UCOREIMG)
 spike: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
 	$(V)$(SPIKE) $(UCOREIMG)
 

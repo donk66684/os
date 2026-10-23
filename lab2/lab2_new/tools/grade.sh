@@ -40,6 +40,7 @@ gdbport='1234'
 gdb_in="$(make_print GRADE_GDB_IN)"
 
 qemu="$(make_print qemu)"
+bios="$(make_print BIOS)"
 qemu_out="$(make_print GRADE_QEMU_OUT)"
 
 if $qemu -nographic -help | grep -q '^-gdb'; then
@@ -222,7 +223,7 @@ osimg=$(make_print ucoreimg)
 swapimg=$(make_print swapimg)
 
 ## qemu-options
-qemuopts="-machine virt -nographic -bios default -device loader,file=bin/ucore.img,addr=0x80200000"
+qemuopts="-machine virt -nographic -bios $bios -kernel bin/ucore.img"
 
 ## the lab2 kernel only while(1) after entering kernel mode and never calls readline,
 ## so no break function is needed and brkfun stays empty

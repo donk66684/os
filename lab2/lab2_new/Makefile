@@ -9,16 +9,16 @@ V       := @
 GCCPREFIX := riscv64-unknown-elf-
 #endif
 
-ifndef QEMU
+ifeq ($(strip $(QEMU)),)
 ifdef QEMU_DEBUG
-QEMU := $(QEMU_DEBUG)
+override QEMU := $(QEMU_DEBUG)
 else
-QEMU := qemu-system-riscv64
+override QEMU := qemu-system-riscv64
 endif
 endif
 
-ifndef BIOS
-BIOS := /mnt/d/Study/OS/.tools/qemu/riscv-qemu-5.1.0-2020.08.1-x86_64-w64-mingw32/bin/opensbi-riscv64-virt-fw_jump.bin
+ifeq ($(strip $(BIOS)),)
+override BIOS := /mnt/d/Study/OS/.tools/qemu/riscv-qemu-5.1.0-2020.08.1-x86_64-w64-mingw32/bin/opensbi-riscv64-virt-fw_jump.bin
 endif
 
 ifndef SPIKE

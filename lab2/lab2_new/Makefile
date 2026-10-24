@@ -10,7 +10,11 @@ GCCPREFIX := riscv64-unknown-elf-
 #endif
 
 ifndef QEMU
+ifdef QEMU_DEBUG
+QEMU := $(QEMU_DEBUG)
+else
 QEMU := qemu-system-riscv64
+endif
 endif
 
 ifndef BIOS
